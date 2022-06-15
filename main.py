@@ -1,3 +1,4 @@
+from random import randint
 import pygame
 
 def main() -> None:
@@ -5,4 +6,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-    
