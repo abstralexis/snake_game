@@ -116,6 +116,7 @@ def main() -> None:
 
         if apple_collision(snake):
             applerect = apple(win, snake) # generate new apple coords
+            snake.eat()
 
         draw(win, snake, applerect)
         drawtail(win, snake.tail_coords)
