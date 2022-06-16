@@ -58,17 +58,17 @@ def main() -> None:
                 pygame.quit()
                 sys.exit()
 
-            # Input checker
-            elif event.type == pygame.KEYDOWN:
-                match event.key:
-                    case pygame.K_UP:
-                        snake.up()
-                    case pygame.K_DOWN:
-                        snake.down()
-                    case pygame.K_LEFT:
-                        snake.left()
-                    case pygame.K_RIGHT:
-                        snake.right()
+        # Input checker
+        for key in pygame.key.get_pressed():
+            match key:
+                case pygame.K_UP:
+                    snake.up()
+                case pygame.K_DOWN:
+                    snake.down()
+                case pygame.K_LEFT:
+                    snake.left()
+                case pygame.K_RIGHT:
+                    snake.right()
 
         snake.move()
 
@@ -79,4 +79,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-    
