@@ -10,9 +10,15 @@ HEIGHT = 500
 BLACK = (0, 0, 0)
 # I used grey insead of white for the grid as white was too in-your-face.
 GREY = (100, 100, 100)
-# A more subdued green (easier on the eyes)
+# Using more subdued colours (easier on the eyes)
 GREEN = (0, 100, 0)
 RED = (100, 0, 0)
+
+YELLOW = (255, 255, 0)
+
+# Init only pygame fonts and set a font
+pygame.font.init()
+TIMESNEWROMAN = pygame.font.SysFont("timesnewroman", 20)
 
 BLOCKSIZE = 20 #Set the size of the grid block
 
@@ -104,7 +110,10 @@ def main() -> None:
     """
     pygame.init()
 
+    score = 0
+
     win = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("Alexis' Snake Game")
     clock = pygame.time.Clock()
 
     # The snake class takes a pygame display as an argument
@@ -134,15 +143,22 @@ def main() -> None:
 
         if apple_collision(snake):
             applerect = apple(win, snake) # generate new apple coords
-            snake.eat()
+            snake.eat()                   # snake eat method
+            score += 1                    # increment score
 
         out_of_bounds_check(win, snake)
         head_tail_collision(win, snake)
 
+        # Get score and render it with reduced opacity
+        score_display = TIMESNEWROMAN.render(f"Score: {score}", True, YELLOW)
+        score_display.set_alpha(175)
+
+        # Call draw methods
         draw(win, snake, applerect)
         drawtail(win, snake.tail_coords)
+        win.blit(score_display, (10, 470))  # Slightly offset from bottom left
         pygame.display.update()
-        clock.tick(12)          # It's snake, we don't need super high fps.
+        clock.tick(12)
 
 
 if __name__ == "__main__":
