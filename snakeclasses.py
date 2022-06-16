@@ -64,12 +64,12 @@ class NewSnake:
         self.y += self.vector[1] * self.SIZE
 
 
-    def tail(self) -> None:
+    def tail(self):
         """
         Function that updates the list with the coordinates of the tail to draw
         """
         dequeue = deque(self.tail_coords)           # dequeue object
-        shifted = dequeue.rotate(1)                 # shift coords to the right
-        shift_list = list(shifted)                  # convert object into list
+        dequeue.rotate(1)                           # shift coords to the right
+        shift_list = list(dequeue)                  # convert object into list
         shift_list[0] = (self.x, self.y)            # add head coords to tail
         self.tail_coords = shift_list               # update self.tail_coords
