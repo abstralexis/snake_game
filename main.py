@@ -13,14 +13,13 @@ GREY = (100, 100, 100)
 # A more subdued green (easier on the eyes)
 GREEN = (0, 100, 0)
 
+BLOCKSIZE = 20 #Set the size of the grid block
+
 # Functions + Methods
 def grid(window) -> None:
     """
     Draw the grid on the window
-    """
-    BLOCKSIZE = 20 #Set the size of the grid block
 
-    """
     Grid for loop, thanks to the answer in
     https://stackoverflow.com/questions/61061963/
     """
@@ -31,13 +30,24 @@ def grid(window) -> None:
             pygame.draw.rect(window, GREY, rect, 1)
 
 
-def draw(screen, snake) -> None:
+def draw(screen: pygame.display, snake: snakeclasses.NewSnake) -> None:
     """
     Main drawing method
     """
     screen.fill(BLACK)
     grid(screen)
     pygame.draw.rect(screen, GREEN, snake.head())
+
+
+def drawtail(screen: pygame.display, coords: list) -> None:
+    """
+    Method for drawing the snake tail
+    """
+    for coordinates in coords:
+        segment_x = coordinates[0]
+        segment_y = coordinates[1]
+        segment_rect = pygame.Rect(segment_x, segment_y, BLOCKSIZE, BLOCKSIZE)
+        pygame.draw.rect(screen, GREEN, segment_rect)
 
 
 def main() -> None:
@@ -58,21 +68,23 @@ def main() -> None:
                 pygame.quit()
                 sys.exit()
 
+        snake.tail()    # Update the coordinates for the tail segments
+
         # Input checker
-        for key in pygame.key.get_pressed():
-            match key:
-                case pygame.K_UP:
-                    snake.up()
-                case pygame.K_DOWN:
-                    snake.down()
-                case pygame.K_LEFT:
-                    snake.left()
-                case pygame.K_RIGHT:
-                    snake.right()
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP]:
+            snake.up()
+        elif keys[pygame.K_DOWN]:
+            snake.down()
+        elif keys[pygame.K_LEFT]:
+            snake.left()
+        elif keys[pygame.K_RIGHT]:
+            snake.right()
 
         snake.move()
 
         draw(win, snake)
+        drawtail(win, snake.tail_coords)
         pygame.display.update()
         clock.tick(12)          # It's snake, we don't need super high fps.
 
