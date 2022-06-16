@@ -80,6 +80,15 @@ def apple_collision(snake: snakeclasses.NewSnake) -> bool:
     return True if (apple_x, apple_y) == (snake.x, snake.y) else False
 
 
+def out_of_bounds_check(screen: pygame.display, snake: snakeclasses.NewSnake):
+    """
+    Exits the game if the snake goes out of bounds
+    """
+    if (snake.x < 0) or (snake.x > 500) or (snake.y < 0) or (snake.y > 500):
+        pygame.quit()
+        sys.exit()
+
+
 def main() -> None:
     """
     Main program 
@@ -117,6 +126,8 @@ def main() -> None:
         if apple_collision(snake):
             applerect = apple(win, snake) # generate new apple coords
             snake.eat()
+
+        out_of_bounds_check(win, snake)
 
         draw(win, snake, applerect)
         drawtail(win, snake.tail_coords)
