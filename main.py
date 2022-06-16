@@ -101,7 +101,7 @@ def head_tail_collision(screen: pygame.display, snake: snakeclasses.NewSnake):
     Exit the game if head is in contact with tail
     """
     if (snake.x, snake.y) in snake.tail_coords:
-        pygame.time.wait(2000) # milliseconds
+        pygame.time.wait(1000) # milliseconds
         pygame.quit()
         sys.exit()
 
