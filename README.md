@@ -7,7 +7,7 @@ hours over a couple of days. This was mostly just so I could
 learn git and GitHub, and I never expected to get this far with 
 a fully working game that I am quite proud of.
 
-## Prerequesites
+## Prerequisites
 
 With that waffle out of the way, I must inform you that this 
 project uses the pygame library with python 3.10.x. To run
