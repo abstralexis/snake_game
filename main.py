@@ -90,7 +90,10 @@ def out_of_bounds_check(screen: pygame.display, snake: snakeclasses.NewSnake):
     """
     Exit the game if the snake goes out of bounds
     """
-    if (snake.x < 0) or (snake.x > 500) or (snake.y < 0) or (snake.y > 500):
+    OUT_OF_WIDTH = (snake.x < 0) or (snake.x > WIDTH-BLOCKSIZE)
+    OUT_OF_HEIGHT = (snake.y < 0) or (snake.y > HEIGHT-BLOCKSIZE)
+
+    if OUT_OF_WIDTH or OUT_OF_HEIGHT:
         pygame.time.wait(1000) # milliseconds
         pygame.quit()
         sys.exit()
